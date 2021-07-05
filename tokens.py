@@ -14,8 +14,8 @@ async def refresh_tokens(tokens: dict) -> dict:
 
 
 async def get_tokens() -> dict:
-    username = os.getenv("username")
-    password = os.getenv("password")
+    username = os.getenv("osu_username")
+    password = os.getenv("osu_password")
 
     async with ClientSession() as session:
         async with session.post("https://osu.ppy.sh/oauth/token", data={

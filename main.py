@@ -1,10 +1,11 @@
 from api import get_users
 from utils import difference_between_lists, iterate_list
 from tokens import get_tokens, refresh_tokens
+from dotenv import load_dotenv
 import asyncio
 import database
 
-
+load_dotenv()
 db_helper = database.Database()
 tokens = {}
 
@@ -12,6 +13,7 @@ tokens = {}
 async def refresh_tokens_task(tokens: dict):
     while True:
         await asyncio.sleep(86000)
+        print("refreshing tokens!")
         tokens = refresh_tokens(tokens)
 
 
