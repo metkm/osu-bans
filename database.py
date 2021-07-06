@@ -1,5 +1,6 @@
 import os
 import pymongo
+from datetime import datetime
 
 
 class Database():
@@ -51,3 +52,24 @@ class Database():
         self.banned.insert_one(user)
 
         return user
+
+    def update_date_checkeds(self, user_ids: list):
+        utc_now = datetime.utcnow()
+        timestamp = utc_now.timestamp()
+
+        self.track.update_many({
+            "user.id": {
+                "$in": user_ids
+            }
+        }, {
+            "$set": {
+                "date_checked": timestamp
+            }
+        })
+
+
+if __name__ == "__main__":
+    db_helper = Database()
+    db_helper.update_date_checked([
+        3674590, 2070822, 10164681
+    ])

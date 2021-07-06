@@ -11,6 +11,9 @@ async def get_users(tokens: dict, user_ids: list) -> dict:
             "ids[]", user_id
         ))
 
-    async with ClientSession() as session:
-        async with session.get("https://osu.ppy.sh/api/v2/users", params=query_params, headers=headers) as response:
-            return await response.json()
+    try:
+        async with ClientSession() as session:
+            async with session.get("https://osu.ppy.sh/api/v2/users", params=query_params, headers=headers) as response:
+                return await response.json()
+    except:
+        return None
